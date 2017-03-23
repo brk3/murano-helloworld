@@ -1,0 +1,36 @@
+Namespaces:
+  =: com.paul
+  std: io.murano
+  res: io.murano.resources
+
+Name: HelloWorld
+
+Extends: std:Application
+
+Properties:
+  instance:
+    Usage: In
+    Contract: $.class(res:Instance).notNull()
+
+Methods:
+  deploy:
+    Body:
+      - $reporter: $this.find(std:Environment).reporter
+      - $reporter.report($this, "Creating VM")
+      - $this.instance.deploy()
+      - type('io.murano.configuration.Linux').runCommand($this.instance.agent, 'touch /tmp/XXX')
+      #- For: blockDevice
+        #In: $this.instance.blockDevices
+        #Do:
+          #- For: attachment
+            #In: $blockDevice.volume.attachments
+            #Do:
+              #- $reporter.report($this, str($attachment.device))
+      - $message: 'VM is up and running at '
+      - If: $this.instance.assignFloatingIp
+        Then:
+          - $message: $message + $this.instance.floatingIpAddress
+        Else:
+          - $message: $message + $this.instance.ipAddresses.first()
+      - $reporter.report($this, $message)
+      - Throw: Exception("STOP")
