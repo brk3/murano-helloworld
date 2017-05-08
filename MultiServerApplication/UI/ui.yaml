@@ -1,0 +1,38 @@
+Application:
+  ?:
+     type: com.paul.HelloWorld
+  servers:
+    ?:
+      type: io.murano.applications.ServerList
+    servers:
+      - ?:
+          type: io.murano.resources.LinuxMuranoInstance
+        name: "Server-1"
+        image: $.instanceConfiguration.image
+        keyname: $.instanceConfiguration.keypair
+        flavor: $.instanceConfiguration.flavor
+        assignFloatingIp: $.instanceConfiguration.assignFloatingIp
+
+      - ?:
+          type: io.murano.resources.LinuxMuranoInstance
+        name: "Server-2"
+        image: $.instanceConfiguration.image
+        keyname: $.instanceConfiguration.keypair
+        flavor: $.instanceConfiguration.flavor
+        assignFloatingIp: $.instanceConfiguration.assignFloatingIp
+
+Forms:
+  - instanceConfiguration:
+      fields:
+        - name: image
+          type: image
+          label: Instance image
+        - name: flavor
+          type: flavor
+          label: Instance flavor
+        - name: assignFloatingIp
+          type: boolean
+          label: Assign Floating IP
+        - name: keypair
+          type: keypair
+          label: keypair
