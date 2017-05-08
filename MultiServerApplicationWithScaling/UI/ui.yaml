@@ -1,0 +1,52 @@
+Application:
+  ?:
+     type: com.paul.HelloWorld
+  servers:
+    ?:
+      type: io.murano.applications.ServerList
+  servers:
+    ?:
+      type: io.murano.applications.ServerReplicationGroup
+    numItems: $.appConfiguration.numNodes
+    provider:
+      ?:
+        type: io.murano.applications.TemplateServerProvider
+      template:
+        ?:
+          type: io.murano.resources.LinuxMuranoInstance
+        image: $.instanceConfiguration.image
+        keyname: $.instanceConfiguration.keypair
+        flavor: $.instanceConfiguration.flavor
+        assignFloatingIp: $.instanceConfiguration.assignFloatingIp
+      serverNamePattern: $.instanceConfiguration.unitNamingPattern
+
+Forms:
+  - appConfiguration:
+      fields:
+        - name: numNodes
+          type: integer
+          label: Initial number of Nodes
+          initial: 1
+          minValue: 1
+          required: true
+
+  - instanceConfiguration:
+      fields:
+        - name: image
+          type: image
+          label: Instance image
+        - name: flavor
+          type: flavor
+          label: Instance flavor
+        - name: assignFloatingIp
+          type: boolean
+          label: Assign Floating IP
+        - name: keypair
+          type: keypair
+          label: keypair
+        - name: unitNamingPattern
+          type: string
+          label: Instance naming pattern
+          required: false
+          maxLength: 64
+          initial: 'node-{0}'
