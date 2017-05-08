@@ -1,0 +1,8 @@
+FullName: com.paul.HelloWorld
+Type: Application
+Description: Hello World app
+Author: Paul Bourke
+Require:
+  io.murano.applications:
+Classes:
+  com.paul.HelloWorld: HelloWorld.yaml

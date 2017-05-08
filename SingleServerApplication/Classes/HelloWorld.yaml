@@ -1,0 +1,19 @@
+Namespaces:
+  =: com.paul
+  std: io.murano
+  res: io.murano.resources
+  apps: io.murano.applications
+
+Name: HelloWorld
+
+Extends: apps:SingleServerApplication
+
+Methods:
+  onInstallServer:
+    Arguments:
+      - server:
+          Contract: $.class(res:Instance).notNull()
+      - serverGroup:
+          Contract: $.class(apps:ServerGroup).notNull()
+    Body:
+      - type('io.murano.configuration.Linux').runCommand($server.agent, 'touch /tmp/XXX')
