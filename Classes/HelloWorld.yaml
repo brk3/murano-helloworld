@@ -19,13 +19,6 @@ Methods:
       - $reporter.report($this, "Creating VM")
       - $this.instance.deploy()
       - type('io.murano.configuration.Linux').runCommand($this.instance.agent, 'touch /tmp/XXX')
-      #- For: blockDevice
-        #In: $this.instance.blockDevices
-        #Do:
-          #- For: attachment
-            #In: $blockDevice.volume.attachments
-            #Do:
-              #- $reporter.report($this, str($attachment.device))
       - $message: 'VM is up and running at '
       - If: $this.instance.assignFloatingIp
         Then:
@@ -33,4 +26,3 @@ Methods:
         Else:
           - $message: $message + $this.instance.ipAddresses.first()
       - $reporter.report($this, $message)
-      - Throw: Exception("STOP")

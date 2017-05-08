@@ -4,42 +4,17 @@ Application:
   instance:
     ?:
       type: io.murano.resources.LinuxMuranoInstance
-    name: $.instanceConfiguration.hostname
+    name: helloworld
     image: $.instanceConfiguration.image
     keyname: $.instanceConfiguration.keypair
     flavor: $.instanceConfiguration.flavor
     assignFloatingIp: $.instanceConfiguration.assignFloatingIp
-    #volumes:
-      #$.instanceConfiguration.volumePath:
-        #?:
-          #type: io.murano.resources.ExistingCinderVolume
-        #openstackId: $.instanceConfiguration.volumeID
-    #blockDevices:
-    #- volume:
-        #?:
-          #type: io.murano.resources.CinderVolume
-        #size: 1
-        #sourceImage: $.instanceConfiguration.sourceLinuxImage
-      #deviceType: disk
-      #bootIndex: 0
-    #- volume:
-        #?:
-          #type: io.murano.resources.CinderVolume
-        #size: 1
-      #deviceType: disk
-      #bootIndex: 1
 
 Forms:
   - instanceConfiguration:
       fields:
-        - name: hostname
-          type: string
-          label: Host Name
-          initial: hello-vm
-          required: false
         - name: image
           type: image
-          imageType: linux
           label: Instance image
         - name: flavor
           type: flavor
@@ -50,26 +25,3 @@ Forms:
         - name: keypair
           type: keypair
           label: keypair
-        #- name: sourceLinuxImage
-          #type: image
-          #label: Linux image
-        #- name: instanceSize
-          #type: integer
-          #label: Size of Linux volume in gigabytes(GB).
-        #- name: sourceLinuxImage2
-          #type: image
-          #label: Linux image
-        #- name: instanceSize2
-          #type: integer
-          #label: Size of db volume in gigabytes(GB).
-        #- name: instanceSize2
-          #type: integer
-          #label: Size of db volume in gigabytes(GB).
-        #- name: volumeID
-          #type: string
-          #label: Existing volume ID
-          #description: Put in existing volume openstackID
-        #- name: volumePath
-          #type: string
-          #label: Path
-          #description: Put in volume path to be mounted
