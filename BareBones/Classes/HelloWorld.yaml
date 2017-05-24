@@ -1,0 +1,11 @@
+Name: HelloWorld
+
+Namespaces:
+  =: com.paul
+
+Extends: io.murano.Application
+
+Methods:
+  deploy:
+    Body:
+      - $foo: 1
