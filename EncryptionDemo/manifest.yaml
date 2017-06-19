@@ -1,0 +1,6 @@
+FullName: com.paul.HelloWorld
+Type: Application
+Description: Hello World app
+Author: Paul Bourke
+Classes:
+  com.paul.HelloWorld: HelloWorld.yaml

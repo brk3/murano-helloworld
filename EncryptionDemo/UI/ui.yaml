@@ -1,0 +1,10 @@
+Application:
+  ?:
+     type: com.paul.HelloWorld
+  MYPROPERTY: encrypt_data($.instanceConfiguration.MYPROPERTY)
+
+Forms:
+  - instanceConfiguration:
+      fields:
+        - name: MYPROPERTY
+          type: string
