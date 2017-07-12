@@ -1,0 +1,24 @@
+Application:
+  ?:
+     type: com.paul.HelloWorld
+  instance:
+    ?:
+      type: io.murano.resources.LinuxMuranoInstance
+    name: helloworld
+    keyname: mykey
+    flavor: m1.tiny
+    assignFloatingIp: true
+    blockDevices:
+      - volume:
+          ?:
+            type: io.murano.resources.CinderVolume
+          size: 1
+          sourceImage: cirros
+        deviceType: disk
+        bootIndex: 0
+      - volume:
+          ?:
+            type: io.murano.resources.CinderVolume
+          size: 1
+        deviceType: disk
+        bootIndex: 1

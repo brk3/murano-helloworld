@@ -1,0 +1,23 @@
+heat_template_version: pike
+resources:
+  n1:
+    type: OS::Nova::Server
+    properties:
+      flavor: m1.tiny
+      image: cirros
+      networks:
+        - network: 83bc81ee-5532-4a2a-ba7f-5063203f9890
+  b1-vol:
+    type: OS::Cinder::Volume
+    properties:
+      size: 2
+  b1-vol-attachment:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      instance_uuid: {get_resource: n1}
+      volume_id: {get_resource: b1-vol}
+outputs:
+  attachments:
+    value: {get_attr: [b1-vol, attachments_list]}
+
+
