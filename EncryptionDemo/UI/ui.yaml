@@ -1,7 +1,7 @@
 Application:
   ?:
      type: com.paul.HelloWorld
-  MYPROPERTY: encrypt_data($.instanceConfiguration.MYPROPERTY)
+  MYPROPERTY: encryptData($.instanceConfiguration.MYPROPERTY)
 
 Forms:
   - instanceConfiguration:
